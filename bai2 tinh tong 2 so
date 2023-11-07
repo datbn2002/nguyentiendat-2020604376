@@ -1,0 +1,33 @@
+import tkinter as tk
+
+def calculate_sum():
+    num1 = float(entry_num1.get())
+    num2 = float(entry_num2.get())
+    result.set(num1 + num2)
+
+# Tạo cửa sổ ứng dụng
+app = tk.Tk()
+app.title("Ứng dụng Giải Tích")
+
+# Tạo các label và entry widgets
+label_num1 = tk.Label(app, text="Số thứ nhất:")
+label_num1.pack()
+entry_num1 = tk.Entry(app)
+entry_num1.pack()
+
+label_num2 = tk.Label(app, text="Số thứ hai:")
+label_num2.pack()
+entry_num2 = tk.Entry(app)
+entry_num2.pack()
+
+# Nút tính tổng
+calculate_button = tk.Button(app, text="Tính tổng", command=calculate_sum)
+calculate_button.pack()
+
+# Hiển thị kết quả
+result = tk.StringVar()
+result_label = tk.Label(app, textvariable=result)
+result_label.pack()
+
+# Khởi chạy ứng dụng
+app.mainloop()
