@@ -1,0 +1,31 @@
+!pip install ipywidgets
+
+import ipywidgets as widgets
+from IPython.display import display
+
+def calculate_area_and_perimeter(change):
+    length = float(entry_length.value)
+    width = float(entry_width.value)
+
+    area = length * width
+    perimeter = 2 * (length + width)
+
+    result.value = f"Diện tích: {area}\nChu vi: {perimeter}"
+
+# Tạo các widgets
+label_length = widgets.Label(value="Chiều dài:")
+entry_length = widgets.FloatText(value=0)
+label_width = widgets.Label(value="Chiều rộng:")
+entry_width = widgets.FloatText(value=0)
+calculate_button = widgets.Button(description="Tính Diện Tích và Chu Vi")
+
+# Sự kiện khi nhấn nút
+calculate_button.on_click(calculate_area_and_perimeter)
+
+# Hiển thị widgets
+display(label_length, entry_length, label_width, entry_width, calculate_button)
+
+# Kết quả
+result = widgets.HTML(value="")
+display(result)
+
