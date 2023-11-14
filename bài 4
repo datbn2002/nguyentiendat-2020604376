@@ -1,0 +1,33 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Đọc dữ liệu từ tệp CSV
+file_path = '/content/sample_data/diemPython.csv'
+data = pd.read_csv(file_path)
+
+# Hiển thị thông tin về cột và dữ liệu
+print("Thông tin về dữ liệu:")
+print(data.info())
+
+# Hiển thị một số dòng đầu tiên của dữ liệu
+print("\nMột số dòng đầu tiên của dữ liệu:")
+print(data.head())
+
+# Xây dựng báo cáo
+def generate_report(data):
+    # Biểu đồ thống kê số lượng sinh viên theo mã lớp
+    plt.figure(figsize=(10, 6))
+    data['Mã lớp'].value_counts().plot(kind='bar')
+    plt.title('Thống kê số lượng sinh viên theo mã lớp')
+    plt.xlabel('Mã lớp')
+    plt.ylabel('Số lượng sinh viên')
+    plt.show()
+
+    # Bảng điểm trung bình theo môn học
+    average_scores = data[['Loại A+', 'Loại A', 'Loại B+', 'Loại B', 'Loại C+', 'Loại C', 'Loại D+', 'Loại D', 'Loại F']].mean().reset_index()
+    average_scores.columns = ['Loại Điểm', 'Điểm Trung Bình']
+    print("\nBảng điểm trung bình theo loại điểm:")
+    print(average_scores)
+
+# Gọi hàm tạo báo cáo
+generate_report(data)
