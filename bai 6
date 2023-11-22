@@ -1,0 +1,37 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn import metrics
+
+# Đọc dữ liệu từ tệp CSV
+file_path = '/content/sample_data/diemPython.csv'
+data = pd.read_csv(file_path)
+
+# In tên các cột
+print(data.columns)
+
+# Hiển thị một số dòng đầu tiên của dữ liệu
+print(data.head())
+
+# Xác định các biến độc lập (features) và biến phụ thuộc (target)
+# Trong trường hợp này, chúng ta sử dụng các loại điểm làm biến độc lập và 
+# điểm cuối kỳ làm biến phụ thuộc
+X = data[['Loại A+', 'Loại A', 'Loại B+', 'Loại B', 'Loại C+', 'Loại C', 'Loại D+', 'Loại D', 'Loại F', 'L1', 'L2', 'TX1', 'TX2']]
+y = data['Cuối kỳ']
+
+# Chia dữ liệu thành tập huấn luyện và tập kiểm tra
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+
+# Tạo mô hình hồi quy tuyến tính
+model = LinearRegression()
+
+# Huấn luyện mô hình trên tập huấn luyện
+model.fit(X_train, y_train)
+
+# Dự đoán trên tập kiểm tra
+y_pred = model.predict(X_test)
+
+# Đánh giá hiệu suất của mô hình
+print('Mean Absolute Error:', metrics.mean_absolute_error(y_test, y_pred))
+print('Mean Squared Error:', metrics.mean_squared_error(y_test, y_pred))
+print('Root Mean Squared Error:', metrics.mean_squared_error(y_test, y_pred, squared=False))
